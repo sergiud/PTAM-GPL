@@ -33,5 +33,5 @@ double FindShiTomasiScoreAtPoint(BasicImage<byte> &image,
   
   // Find and return smaller eigenvalue:
   return 0.5 * (dXX + dYY - sqrt( (dXX + dYY) * (dXX + dYY) - 4 * (dXX * dYY - dXY * dXY) ));
-};
+}
 

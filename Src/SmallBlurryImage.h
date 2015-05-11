@@ -23,7 +23,7 @@ class SmallBlurryImage
   double ZMSSD(SmallBlurryImage &other);
   std::pair<SE2<>,double> IteratePosRelToTarget(SmallBlurryImage &other, int nIterations = 10);
   static SE3<> SE3fromSE2(SE2<> se2, ATANCamera camera);
-  
+
 protected:
   CVD::Image<CVD::byte> mimSmall;
   CVD::Image<float> mimTemplate;

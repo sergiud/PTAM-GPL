@@ -12,7 +12,7 @@ Relocaliser::Relocaliser(Map &map, ATANCamera &camera)
   : mMap(map),
     mCamera(camera)
 {
-};
+}
 
 SE3<> Relocaliser::BestPose()
 {
@@ -42,7 +42,7 @@ bool Relocaliser::AttemptRecovery(KeyFrame &kCurrent)
     return true;
   else 
     return false;
-};
+}
 
 // Compare current KF to all KFs stored in map by
 // Zero-mean SSD

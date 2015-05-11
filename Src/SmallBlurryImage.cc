@@ -75,7 +75,7 @@ void SmallBlurryImage::MakeJacs()
     }
   while(ir.next(mirSize));
   mbMadeJacs = true;
-};
+}
 
 // Calculate the zero-mean SSD between one image and the next.
 // Since both are zero mean already, just calculate the SSD...

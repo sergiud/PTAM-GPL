@@ -27,15 +27,15 @@ void Map::MoveBadPointsToTrash()
 	  vpPoints.erase(vpPoints.begin() + i);
 	  nBad++;
 	}
-    };
-};
+    }
+}
 
 void Map::EmptyTrash()
 {
   for(unsigned int i=0; i<vpPointsTrash.size(); i++)
     delete vpPointsTrash[i];
   vpPointsTrash.clear();
-};
+}
 
 
 

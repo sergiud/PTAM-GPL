@@ -5,6 +5,8 @@
 #include <cvd/vision.h>
 #include <cvd/fast_corner.h>
 
+#include "settingsCustom.h"
+
 using namespace CVD;
 using namespace std;
 using namespace GVars3;
@@ -63,7 +65,7 @@ void KeyFrame::MakeKeyFrame_Rest()
   // Fills the rest of the keyframe structure needed by the mapmaker:
   // FAST nonmax suppression, generation of the list of candidates for further map points,
   // creation of the relocaliser's SmallBlurryImage.
-  static gvar3<double> gvdCandidateMinSTScore("MapMaker.CandidateMinShiTomasiScore", 70, SILENT);
+  static gvar3<double> gvdCandidateMinSTScore("MapMaker.CandidateMinShiTomasiScore", MAPMAKER_MIN_SHI_THOMASI_SCORE, SILENT);
   
   // For each level...
   for(int l=0; l<LEVELS; l++)

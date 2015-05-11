@@ -8,11 +8,13 @@ using namespace std;
 using namespace CVD;
 using namespace GVars3;
 
-ATANCamera::ATANCamera(string sName)
+ATANCamera::ATANCamera(TooN::Vector<5> params)
 {
   // The camera name is used to find the camera's parameters in a GVar.
-  msName = sName;
-  GV2.Register(mgvvCameraParams, sName+".Parameters", mvDefaultParams, HIDDEN | FATAL_IF_NOT_DEFINED);
+  msName = "Camera";
+  //mgvvCameraParams = params;
+  GV2.Register(mgvvCameraParams, "Camera.Parameters",params,HIDDEN | SILENT);
+  //GV2.Register(mgvvCameraParams, sName+".Parameters", mvDefaultParams, HIDDEN | FATAL_IF_NOT_DEFINED);
   mvImageSize[0] = 640.0;
   mvImageSize[1] = 480.0;
   RefreshParams();
@@ -22,7 +24,7 @@ void ATANCamera::SetImageSize(Vector<2> vImageSize)
 {
   mvImageSize = vImageSize;
   RefreshParams();
-};
+}
 
 void ATANCamera::RefreshParams() 
 {
@@ -60,7 +62,7 @@ void ATANCamera::RefreshParams()
   Vector<2> v2;
   v2[0]= max((*mgvvCameraParams)[2], 1.0 - (*mgvvCameraParams)[2]) / (*mgvvCameraParams)[0];
   v2[1]= max((*mgvvCameraParams)[3], 1.0 - (*mgvvCameraParams)[3]) / (*mgvvCameraParams)[1];
-  mdLargestRadius = invrtrans(sqrt(v2*v2));
+  mdLargestRadius = invrtrans(sqrt((double)(v2*v2)));
   
   // At what stage does the model become invalid?
   mdMaxR = 1.5 * mdLargestRadius; // (pretty arbitrary)
@@ -71,7 +73,7 @@ void ATANCamera::RefreshParams()
     Vector<2> v2Center = UnProject(mvImageSize / 2);
     Vector<2> v2RootTwoAway = UnProject(mvImageSize / 2 + vec(ImageRef(1,1)));
     Vector<2> v2Diff = v2Center - v2RootTwoAway;
-    mdOnePixelDist = sqrt(v2Diff * v2Diff) / sqrt(2.0);
+    mdOnePixelDist = sqrt((double)(v2Diff * v2Diff)) / sqrt(2.0);
   }
   
   // Work out the linear projection values for the UFB
@@ -108,7 +110,7 @@ void ATANCamera::RefreshParams()
 // while storing intermediate calculation results in member variables
 Vector<2> ATANCamera::Project(const Vector<2>& vCam){
   mvLastCam = vCam;
-  mdLastR = sqrt(vCam * vCam);
+  mdLastR = sqrt((double)(vCam * vCam));
   mbInvalid = (mdLastR > mdMaxR);
   mdLastFactor = rtrans_factor(mdLastR);
   mdLastDistR = mdLastFactor * mdLastR;
@@ -127,7 +129,8 @@ Vector<2> ATANCamera::UnProject(const Vector<2>& v2Im)
   mvLastIm = v2Im;
   mvLastDistCam[0] = (mvLastIm[0] - mvCenter[0]) * mvInvFocal[0];
   mvLastDistCam[1] = (mvLastIm[1] - mvCenter[1]) * mvInvFocal[1];
-  mdLastDistR = sqrt(mvLastDistCam * mvLastDistCam);
+  mdLastDistR = sqrt((double)(mvLastDistCam * mvLastDistCam));
+
   mdLastR = invrtrans(mdLastDistR);
   double dFactor;
   if(mdLastDistR > 0.01)
@@ -167,7 +170,7 @@ Matrix<4> ATANCamera::MakeUFBLinearFrustumMatrix(double near, double far)
   m4[2][3] = 2*near*far / (near - far);
 
   return m4;
-};
+}
 
 Matrix<2,2> ATANCamera::GetProjectionDerivs()
 {
@@ -252,7 +255,7 @@ Vector<2> ATANCamera::UFBProject(const Vector<2>& vCam)
 {
   // Project from camera z=1 plane to UFB, storing intermediate calc results.
   mvLastCam = vCam;
-  mdLastR = sqrt(vCam * vCam);
+  mdLastR = sqrt((double)(vCam * vCam));
   mbInvalid = (mdLastR > mdMaxR);
   mdLastFactor = rtrans_factor(mdLastR);
   mdLastDistR = mdLastFactor * mdLastR;
@@ -268,7 +271,7 @@ Vector<2> ATANCamera::UFBUnProject(const Vector<2>& v2Im)
   mvLastIm = v2Im;
   mvLastDistCam[0] = (mvLastIm[0] - (*mgvvCameraParams)[2]) / (*mgvvCameraParams)[0];
   mvLastDistCam[1] = (mvLastIm[1] - (*mgvvCameraParams)[3]) / (*mgvvCameraParams)[1];
-  mdLastDistR = sqrt(mvLastDistCam * mvLastDistCam);
+  mdLastDistR = sqrt((double)(mvLastDistCam * mvLastDistCam));
   mdLastR = invrtrans(mdLastDistR);
   double dFactor;
   if(mdLastDistR > 0.01)

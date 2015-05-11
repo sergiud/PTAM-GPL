@@ -26,7 +26,7 @@ PatchFinder::PatchFinder(int nPatchSize)
   // Populate the speed-up caches with bogus values:
   mm2LastWarpMatrix = 9999.9 * Identity;
   mpLastTemplateMapPoint = NULL;
-};
+}
 
 
 // Find the warping matrix and search level
@@ -75,7 +75,7 @@ void PatchFinder::MakeTemplateCoarse(MapPoint &p,
 {
   CalcSearchLevelAndWarpMatrix(p, se3CFromW, m2CamDerivs);
   MakeTemplateCoarseCont(p);
-};
+}
 
 // This function generates the warped search template.
 void PatchFinder::MakeTemplateCoarseCont(MapPoint &p)
@@ -125,7 +125,7 @@ void PatchFinder::MakeTemplateCoarseCont(MapPoint &p)
       mpLastTemplateMapPoint = &p;
       mm2LastWarpMatrix = m2;
     }
-};
+}
 
 // This makes a template without warping. Used for epipolar search, where we don't really know 
 // what the warping matrix should be. (Although to be fair, I should do rotation for epipolar,
@@ -152,7 +152,7 @@ void PatchFinder::MakeTemplateCoarseNoWarp(KeyFrame &k, int nLevel, ImageRef irL
 void PatchFinder::MakeTemplateCoarseNoWarp(MapPoint &p)
 {
   MakeTemplateCoarseNoWarp(*p.pPatchSourceKF, p.nSourceLevel,  p.irCenter);
-};
+}
 
 // Finds the sum, and sum-squared, of template pixels. These sums are used
 // to calculate the ZMSSD.

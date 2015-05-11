@@ -18,7 +18,7 @@ inline Matrix<2> M2Inverse(const Matrix<2> &m)
   m2Res[1][0] = -m[1][0] * dInverseDet;
   m2Res[0][1] = -m[0][1] * dInverseDet;
   return m2Res;
-};
+}
 
 // Determinant of 2x2
 inline double M2Det(Matrix<2> m)
@@ -29,9 +29,9 @@ inline double M2Det(Matrix<2> m)
 // Determinant of 3x3
 inline double M3Det(Matrix<3> m )
 {
-  return  
-    m[0][0] * (m[1][1] * m[2][2]  - m[1][2] * m[2][1]) - 
-    m[0][1] * (m[1][0] * m[2][2]  - m[1][2] * m[2][0]) + 
+  return
+    m[0][0] * (m[1][1] * m[2][2]  - m[1][2] * m[2][1]) -
+    m[0][1] * (m[1][0] * m[2][2]  - m[1][2] * m[2][0]) +
     m[0][2] * (m[1][0] * m[2][1]  - m[1][1] * m[2][0]);
 }
 

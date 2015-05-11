@@ -74,8 +74,8 @@ inline double Tukey::ObjectiveScore(double dErrorSquared, const double dSigmaSqu
 
 
 inline double Tukey::FindSigmaSquared(std::vector<double> &vdErrorSquared)
-{ 
-  double dSigmaSquared; 
+{
+  double dSigmaSquared;
   assert(vdErrorSquared.size() > 0);
   std::sort(vdErrorSquared.begin(), vdErrorSquared.end());
   double dMedianSquared = vdErrorSquared[vdErrorSquared.size() / 2];
@@ -108,8 +108,8 @@ inline double Cauchy::ObjectiveScore(double dErrorSquared, const double dSigmaSq
 
 
 inline double Cauchy::FindSigmaSquared(std::vector<double> &vdErrorSquared)
-{ 
-  double dSigmaSquared; 
+{
+  double dSigmaSquared;
   assert(vdErrorSquared.size() > 0);
   std::sort(vdErrorSquared.begin(), vdErrorSquared.end());
   double dMedianSquared = vdErrorSquared[vdErrorSquared.size() / 2];
@@ -152,8 +152,8 @@ inline double Huber::ObjectiveScore(double dErrorSquared, const double dSigmaSqu
 
 
 inline double Huber::FindSigmaSquared(std::vector<double> &vdErrorSquared)
-{ 
-  double dSigmaSquared; 
+{
+  double dSigmaSquared;
   assert(vdErrorSquared.size() > 0);
   std::sort(vdErrorSquared.begin(), vdErrorSquared.end());
   double dMedianSquared = vdErrorSquared[vdErrorSquared.size() / 2];
@@ -170,22 +170,27 @@ inline double Huber::FindSigmaSquared(std::vector<double> &vdErrorSquared)
 
 inline double LeastSquares::Weight(double dErrorSquared, double dSigmaSquared)
 {
+  (void)dErrorSquared;
+  (void)dSigmaSquared;
   return 1.0;
 }
 
 inline double LeastSquares::SquareRootWeight(double dErrorSquared, double dSigmaSquared)
 {
+  (void)dErrorSquared;
+  (void)dSigmaSquared;
   return 1.0;
 }
 
 inline double LeastSquares::ObjectiveScore(double dErrorSquared, const double dSigmaSquared)
 {
+  (void)dSigmaSquared;
   return dErrorSquared;
 }
 
 
 inline double LeastSquares::FindSigmaSquared(std::vector<double> &vdErrorSquared)
-{ 
+{
   if(vdErrorSquared.size() == 0)
     return 0.0;
   double dSum = 0.0;

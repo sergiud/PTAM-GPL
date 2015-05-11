@@ -12,11 +12,11 @@ void MapPoint::RefreshPixelVectors()
   
   // Find the height of this above the plane.
   // Assumes the normal is  pointing toward the camera.
-  double dCamHeight = fabs(v3PlanePoint_C * v3Normal_NC);
+  double dCamHeight = fabs((double)(v3PlanePoint_C * v3Normal_NC));
 
-  double dPixelRate = fabs(v3Center_NC * v3Normal_NC);
-  double dOneRightRate = fabs(v3OneRightFromCenter_NC * v3Normal_NC);
-  double dOneDownRate = fabs(v3OneDownFromCenter_NC * v3Normal_NC);
+  double dPixelRate = fabs((double)(v3Center_NC * v3Normal_NC));
+  double dOneRightRate = fabs((double)(v3OneRightFromCenter_NC * v3Normal_NC));
+  double dOneDownRate = fabs((double)(v3OneDownFromCenter_NC * v3Normal_NC));
   
   // Find projections onto plane
   Vector<3> v3CenterOnPlane_C = v3Center_NC * dCamHeight / dPixelRate;
