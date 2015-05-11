@@ -25,7 +25,6 @@
 #include "ATANCamera.h"
 #include "MiniPatch.h"
 #include "Relocaliser.h"
-#include "../Predictor.h"
 
 #include <sstream>
 #include <vector>
