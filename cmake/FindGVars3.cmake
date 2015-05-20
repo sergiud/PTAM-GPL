@@ -15,5 +15,8 @@ endif (GVars3_INCLUDE_DIR)
 
 set_target_properties (GVars3 PROPERTIES IMPORTED_LOCATION ${GVars3_LIBRARY})
 
+set (GVars3_INCLUDE_DIRS ${GVars3_INCLUDE_DIR})
+set (GVars3_LIBRARIES ${GVars3_LIBRARY})
+
 find_package_handle_standard_args (GVars3 REQUIRED_VARS GVars3_INCLUDE_DIR
   GVars3_LIBRARY)

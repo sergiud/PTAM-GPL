@@ -1,7 +1,7 @@
 @PACKAGE_INIT@
 
 include ("${CMAKE_CURRENT_LIST_DIR}/ptam-targets.cmake")
-set_and_check (ptam_INCLUDE_DIR "@PACKAGE_ptam_INCLUDE_DIR@")
+set_and_check (PTAM_INCLUDE_DIR "@PACKAGE_PTAM_INCLUDE_DIR@")
 
-set (ptam_LIBRARIES ptam)
-set (ptam_INCLUDE_DIRS ${ptam_INCLUDE_DIR})
+set (PTAM_LIBRARIES PTAM)
+set (PTAM_INCLUDE_DIRS ${PTAM_INCLUDE_DIR})

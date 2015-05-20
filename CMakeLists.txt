@@ -30,7 +30,7 @@ find_package (LibCVD REQUIRED)
 find_package (OpenGL REQUIRED)
 find_package (TooN REQUIRED)
 
-add_library (ptam
+add_library (PTAM
   Src/ARDriver.cc
   Src/ARDriver.h
   Src/ATANCamera.cc
@@ -86,41 +86,46 @@ add_library (ptam
   Src/settingsCustom.h
 )
 
-target_include_directories (ptam PUBLIC ${OPENGL_INCLUDE_DIRS})
-target_link_libraries (ptam PUBLIC LibCVD GVars3 TooN ${OPENGL_LIBRARIES})
+target_include_directories (PTAM PUBLIC ${OPENGL_INCLUDE_DIRS}
+  ${TooN_INCLUDE_DIRS})
+target_link_libraries (PTAM PUBLIC ${LibCVD_LIBARIES} ${GVars3_LIBRARIES} ${OPENGL_LIBRARIES})
 
-install (TARGETS ptam
+install (TARGETS PTAM
   EXPORT ptam-targets
   RUNTIME DESTINATION bin
   PUBLIC_HEADER DESTINATION include
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib)
 
-set (ptam_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Src)
+set (PTAM_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Src)
 
-configure_package_config_file (
-  ptam-config.cmake.in
-  ${CMAKE_CURRENT_BINARY_DIR}/ptam-config.cmake INSTALL_DESTINATION
-  lib/cmake/ptam PATH_VARS ptam_INCLUDE_DIR)
-write_basic_package_version_file (ptam-config-version.cmake VERSION ${VERSION}
+configure_package_config_file (ptam-config.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/ptam-config.cmake
+  INSTALL_DESTINATION lib/cmake/PTAM
+  PATH_VARS PTAM_INCLUDE_DIR)
+write_basic_package_version_file (ptam-config-version.cmake
+  VERSION ${VERSION}
   COMPATIBILITY SameMajorVersion)
 
-set (ptam_INCLUDE_DIR include)
+set (PTAM_INCLUDE_DIR include)
 
-configure_package_config_file (
-  ptam-config.cmake.in
-  ${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/ptam-config.cmake INSTALL_DESTINATION
-  lib/cmake/ptam PATH_VARS ptam_INCLUDE_DIR)
+configure_package_config_file (ptam-config.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/ptam-config-install.cmake
+  INSTALL_DESTINATION lib/cmake/PTAM
+  PATH_VARS PTAM_INCLUDE_DIR)
 
-export (TARGETS ptam FILE ptam-targets.cmake)
-export (PACKAGE ptam)
+export (TARGETS PTAM FILE ptam-targets.cmake)
+export (PACKAGE PTAM)
 
-install (EXPORT ptam-targets DESTINATION lib/cmake/ptam)
-install (FILES ${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/ptam-config.cmake
-  ${CMAKE_CURRENT_BINARY_DIR}/ptam-config-version.cmake DESTINATION
-  lib/cmake/ptam)
+install (EXPORT ptam-targets DESTINATION lib/cmake/PTAM)
+install (FILES ${CMAKE_CURRENT_BINARY_DIR}/ptam-config-install.cmake
+  DESTINATION lib/cmake/PTAM
+  RENAME ptam-config.cmake)
+install (FILES ${CMAKE_CURRENT_BINARY_DIR}/ptam-config-version.cmake
+  DESTINATION lib/cmake/PTAM)
 install (DIRECTORY Src/ DESTINATION include FILES_MATCHING PATTERN "*.h")
 
-set_target_properties (ptam PROPERTIES POSITION_INDEPENDENT_CODE ON)
-set_target_properties (ptam PROPERTIES VERSION ${MAJOR_VERSION})
-set_target_properties (ptam PROPERTIES SOVERSION ${VERSION})
+set_target_properties (PTAM PROPERTIES POSITION_INDEPENDENT_CODE ON)
+set_target_properties (PTAM PROPERTIES VERSION ${MAJOR_VERSION})
+set_target_properties (PTAM PROPERTIES SOVERSION ${VERSION})
+set_target_properties (PTAM PROPERTIES OUTPUT_NAME ptam)

@@ -11,4 +11,6 @@ if (TooN_INCLUDE_DIR)
     ${TooN_INCLUDE_DIR})
 endif (TooN_INCLUDE_DIR)
 
+set (TooN_INCLUDE_DIRS ${TooN_INCLUDE_DIR})
+
 find_package_handle_standard_args (TooN REQUIRED_VARS TooN_INCLUDE_DIR)
