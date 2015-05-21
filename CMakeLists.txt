@@ -41,8 +41,6 @@ add_library (PTAM
   Src/CalibCornerPatch.h
   Src/CalibImage.cc
   Src/CalibImage.h
-  Src/CameraCalibrator.cc
-  Src/CameraCalibrator.h
   Src/EyeGame.cc
   Src/EyeGame.h
   Src/GLWindow2.cc
@@ -88,7 +86,15 @@ add_library (PTAM
 
 target_include_directories (PTAM PUBLIC ${OPENGL_INCLUDE_DIRS}
   ${TooN_INCLUDE_DIRS})
-target_link_libraries (PTAM PUBLIC ${LibCVD_LIBARIES} ${GVars3_LIBRARIES} ${OPENGL_LIBRARIES})
+target_link_libraries (PTAM PUBLIC ${LibCVD_LIBRARIES} ${GVars3_LIBRARIES}
+  ${OPENGL_LIBRARIES})
+
+add_executable (CameraCalibrator
+  Src/CameraCalibrator.cc
+  Src/CameraCalibrator.h
+)
+
+target_link_libraries (CameraCalibrator PRIVATE PTAM)
 
 install (TARGETS PTAM
   EXPORT ptam-targets
