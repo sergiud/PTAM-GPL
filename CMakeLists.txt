@@ -26,6 +26,7 @@ include (CMakePackageConfigHelpers)
 include (CPack)
 
 find_package (GVars3 REQUIRED)
+find_package (LAPACK REQUIRED)
 find_package (LibCVD REQUIRED)
 find_package (OpenGL REQUIRED)
 find_package (TooN REQUIRED)
@@ -85,9 +86,9 @@ add_library (PTAM
 )
 
 target_include_directories (PTAM PUBLIC ${OPENGL_INCLUDE_DIRS}
-  ${TooN_INCLUDE_DIRS})
+  ${TooN_INCLUDE_DIRS} ${LAPACK_INCLUDE_DIRS})
 target_link_libraries (PTAM PUBLIC ${LibCVD_LIBRARIES} ${GVars3_LIBRARIES}
-  ${OPENGL_LIBRARIES})
+  ${OPENGL_LIBRARIES} ${LAPACK_LIBRARIES})
 
 add_executable (CameraCalibrator
   Src/CameraCalibrator.cc
